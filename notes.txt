@@ -1,0 +1,93 @@
+'''
+-----------------------------------------------------------------
+----------------------------- MySQL -----------------------------
+-----------------------------------------------------------------
+
+MySQL is a DBMS (database management system) developed by Oracle
+
+To get this DBMS this link must be followed (there are several 
+distributions of MySQL but we'll be working with the Community distribution):
+
+https://dev.mysql.com/get/Downloads/MySQLInstaller/mysql-installer-community-8.0.29.0.msi
+
+This sofware will be downloaded using the previous link. If any problem 
+presented during the installation there must be deleted every SQL 
+software (if possible) from the PC. The installation will required a 
+password creation and several 'next' steps
+
+It will allow to create several SQL connections or sessions, this helps to
+manage several servers/databases/projects. Once opened the MySQL Workbench
+there is a left vertical panel for:
+1 - Welcome panel: It offers access to every MySQL projects, to manage every
+MySQL project and to create new ones
+2 - Models: It offers acces to every developed BD model available on the PC
+3 - Migration: It allows several options to migrate DB
+
+-----------------------------------------------------------------
+------------------- MySQL creating a database -------------------
+--------------------- from the MySQL prompt ---------------------
+-----------------------------------------------------------------
+
+From the 'Welcome panel' there can be accessed the MySQL prompt by right clicking 
+any available connections at the 'MySQL connections' sub-panel and selecting the 
+'Start Command Line Client'
+
+Once accessed any connection the prompt will ask for the connection password
+and once introduced the password there can be typed any SQL query on the prompt
+
+In this case there will be used the next line of code:
+
+'CREATE DATABASE blogs;'
+
+This way a databse can be created using MySQL prompt
+
+-----------------------------------------------------------------
+--------------------- MySQL creating a table --------------------
+-------------------- and inserting data to it -------------------
+--------------------- from the MySQL prompt ---------------------
+-----------------------------------------------------------------
+
+To create a table within the MySQL prompt there has to be used the common SQL
+sybtax for a query. In this case there will be used the next line of code:
+
+'USE blogs;
+CREATE TABLE topics (topic_id INT (11) NOT NULL AUTO_INCREMENT, title VARCHAR (30), category VARCHAR (255), PRIMARY KEY(topic_id));'
+
+CREATE TABLE tasks (task_id INT(11) NOT NULL AUTO_INCREMENT, topic_id INT(11) NOT NULL, description VARCHAR (255) ,PRIMARY KEY(task_id), FOREIGN KEY (topic_id) REFERENCES topics (topic_id));
+
+This lines of code will allows us to use the 'blogs' database
+and then we'll be able to create a table within that database with
+several columns within it
+
+Adding the next line of code will to add values to the topics table
+
+INSERT INTO topics (title,category) VALUES ("Link is not working", "HTML");
+INSERT INTO tasks (description,topic_id) VALUES ("Make sure the URL path is entered correctly", 1);
+INSERT INTO tasks (description,topic_id) VALUES ("Type the URL in the href attribute", 1);
+INSERT INTO topics (title,category) VALUES ("MySQL server is not responding", "MySQL DBMS");
+INSERT INTO tasks (description,topic_id) VALUES ("Reconfigure MySQL server", 2);
+
+The block of codes adds data to both tables, either the 'topics' and 'tasks' tables.
+The data inserted into the 'topics' does not add any value to the 'topic_id' 
+field/column, this is because the 'topic_id' field is autoincremented, this way 
+the field does not adds a NULL value even no value is passed.
+
+For the 'tasks' table there must be passed a value related to the 'foregin key' 
+referenced in the 'topics' table, particulary in the 'topic_id' column/field.
+There has to be considered that every row inserted within the 'topics' table 
+has to have a matching value within the 'topic_id' column from the 'topics' table.
+Note that for every row added in the 'tasks' table there was included a value 
+for the 'topic_id' field matching one of the supposedly already declared value
+from the 'topics' table 'topic_id' column/field.
+
+To see every table added to the database there can be used the next line of code:
+
+'USE blogs;
+SHOW TABLES;'
+
+To fetch a table from a database there has to be used the SQL syntax
+
+'USE blogs;
+SELECT * FROM topics;
+SELECT * FROM tasks;'
+'''
